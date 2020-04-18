@@ -53,4 +53,74 @@ public:
 		return out;
 	}
 
+
+	Matrix& operator+(const Matrix& a)
+	{
+			if (a.line != this->line || a.collumn != this->collumn)
+			{
+				throw exception("Matrices have different sizes");
+			}
+			for (int i = 0; i < a.line; i++)
+				for (int j = 0; j < a.collumn; j++)
+					this->arr[i][j]=a.arr[i][j] + this->arr[i][j];
+			return *this;
+	}
+
+	Matrix& operator-(const Matrix& a)
+	{
+		if (a.line != this->line || a.collumn != this->collumn)
+		{
+			throw exception("Matrices have different sizes");
+		}
+			for (int i = 0; i < a.line; i++)
+				for (int j = 0; j < a.collumn; j++)
+					this->arr[i][j] =  this->arr[i][j]-a.arr[i][j] ;
+			return *this;
+	}
+	void multiplication(const Matrix& a, const Matrix& b)
+	{
+		if(a.collumn != b.line)
+		{
+			throw exception("Matrices are incompatible");
+		}
+
+	};
+	Matrix& operator*(const Matrix& a)
+	{
+		if (this->collumn != a.line)
+		{
+			throw exception("Matrices are incompatible");
+		}
+			Matrix c(this->line, a.collumn);
+			for (int i = 0; i < this->line; i++)
+				for (int j = 0; j < a.collumn; j++)
+					for(int k=0;k< this->collumn;k++)
+					c.arr[i][j] += this->arr[i][k] * a.arr[k][j];
+			return c;
+
+	}
+
 };
+int main()
+{
+	Matrix a(3, 2);
+	Matrix b(2, 3);
+
+	Matrix c(0,0);
+	for (int i = 0; i < b.line; i++)
+		for (int j = 0; j < b.collumn; j++)
+			b.arr[i][j] = i + j;
+	for (int i = 0; i < a.line; i++)
+		for (int j = 0; j < a.collumn; j++)
+			a.arr[i][j] = i + j;
+	try 
+	{
+		cout << a * b;
+
+	}
+	catch (const  exception& ex)
+	{
+		cout << ex.what() << endl;
+	}
+
+}

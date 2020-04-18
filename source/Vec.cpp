@@ -9,7 +9,7 @@ public:
 	{
 		size = len;
 		arr = new double[len];
-	}
+	}			
 	friend std::ostream& operator<<(std::ostream& out, Vec& a)
 	{
 		for (int i = 0; i < a.size; i++)
