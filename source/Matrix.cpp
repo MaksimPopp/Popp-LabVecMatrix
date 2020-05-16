@@ -77,21 +77,17 @@ public:
 					this->arr[i][j] =  this->arr[i][j]-a.arr[i][j] ;
 			return *this;
 	}
-	void multiplication(const Matrix& a, const Matrix& b)
-	{
-		if(a.collumn != b.line)
-		{
-			throw exception("Matrices are incompatible");
-		}
 
-	};
-	Matrix& operator*(const Matrix& a)
+	Matrix operator*(const Matrix& a)
 	{
 		if (this->collumn != a.line)
 		{
 			throw exception("Matrices are incompatible");
 		}
 			Matrix c(this->line, a.collumn);
+			for (int i = 0; i < c.line; i++)
+				for (int j = 0; j < c.collumn; j++)
+					c.arr[i][j] = 0;
 			for (int i = 0; i < this->line; i++)
 				for (int j = 0; j < a.collumn; j++)
 					for(int k=0;k< this->collumn;k++)
@@ -115,8 +111,8 @@ int main()
 			a.arr[i][j] = i + j;
 	try 
 	{
-		cout << a * b;
-
+	c=( a * b);
+	cout <<c;
 	}
 	catch (const  exception& ex)
 	{
